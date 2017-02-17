@@ -5,7 +5,7 @@ package com.six.patterns;
  * Created by hellenxu on 2017-02-16.
  */
 public class SingletonSample {
-    private static SingletonSample instance;
+    private static volatile SingletonSample instance;
 
     public static SingletonSample getInstance(){
         if(instance == null){
