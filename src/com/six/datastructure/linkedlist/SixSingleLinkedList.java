@@ -1,4 +1,4 @@
-package com.six.datastructure;
+package com.six.datastructure.linkedlist;
 
 /**
  * @author hellenxu
@@ -26,7 +26,10 @@ public class SixSingleLinkedList {
     }
 
     void insertHead(SixNode newHead) {
-        SixNode oldHead = new SixNode(head.value, head.next);
+        SixNode oldHead = null;
+        if (head != null) {
+            oldHead = new SixNode(head.value, head.next);
+        }
         head = new SixNode(newHead.value, oldHead);
         length++;
     }
@@ -82,11 +85,15 @@ public class SixSingleLinkedList {
         return targetNode;
     }
 
+    SixNode getHead() {
+        return head;
+    }
+
     @Override
     public String toString() {
         StringBuilder content = new StringBuilder();
         SixNode currentNode = head;
-        for (int i = 0; i < length - 1; i++) {
+        while (currentNode.next != null) {
             content.append(currentNode.value)
                     .append(" -> ");
             currentNode = currentNode.next;
