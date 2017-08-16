@@ -10,7 +10,7 @@ public class SemaphoreProducerConsumer {
     public static void main(String[] args) {
         try {
             SemaphoreFactory factory = new SemaphoreFactory();
-            new Thread(new Worker(factory)).start();
+            new Thread(new Worker0(factory)).start();
             new Thread(new Consumer(factory)).start();
         } catch (InterruptedException e) {
             e.printStackTrace();
