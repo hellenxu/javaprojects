@@ -61,14 +61,14 @@ class SemaphoreFactory {
     private int inventory = 0;
 
     SemaphoreFactory() throws InterruptedException {
-        worker = new Semaphore(1);
+        worker = new Semaphore(2);
         consumer = new Semaphore(0);
     }
 
     public void produce() throws InterruptedException {
-        worker.acquire();
+        worker.acquire(); // use one of permits
         System.out.println("producing: " + (++ inventory));
-        consumer.release();
+        consumer.release(); // increase its permits
     }
 
     public void consume() throws InterruptedException {
