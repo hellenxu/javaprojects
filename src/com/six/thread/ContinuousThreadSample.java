@@ -12,49 +12,40 @@ public class ContinuousThreadSample {
         final Semaphore s1 = new Semaphore(1);
         final Semaphore s2 = new Semaphore(1);
 
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    System.out.println("t1");
-                    s1.release();
-                    System.out.println("t1-s1 permits: " + s1.availablePermits());
-                    System.out.println("t1-s2 permits: " + s2.availablePermits());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        Thread t1 = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                System.out.println("t1");
+                s1.release();
+                System.out.println("t1-s1 permits: " + s1.availablePermits());
+                System.out.println("t1-s2 permits: " + s2.availablePermits());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
 
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println("t2-s1 permits: " + s1.availablePermits());
-                    System.out.println("t2-s2 permits: " + s2.availablePermits());
-                    s1.acquire();
-                    Thread.sleep(1500);
-                    System.out.println("t2");
-                    s2.release();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        Thread t2 = new Thread(() -> {
+            try {
+                System.out.println("t2-s1 permits: " + s1.availablePermits());
+                System.out.println("t2-s2 permits: " + s2.availablePermits());
+                s1.acquire();
+                Thread.sleep(1500);
+                System.out.println("t2");
+                s2.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
 
-        Thread t3 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println("t3-s1 permits: " + s1.availablePermits());
-                    System.out.println("t3-s2 permits: " + s2.availablePermits());
-                    s2.acquire();
-                    Thread.sleep(2500);
-                    System.out.println("t3");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        Thread t3 = new Thread(() -> {
+            try {
+                System.out.println("t3-s1 permits: " + s1.availablePermits());
+                System.out.println("t3-s2 permits: " + s2.availablePermits());
+                s2.acquire();
+                Thread.sleep(2500);
+                System.out.println("t3");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
         try {
