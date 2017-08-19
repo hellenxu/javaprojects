@@ -19,6 +19,8 @@ public class ContinuousThreadSample {
                     Thread.sleep(2000);
                     System.out.println("t1");
                     s1.release();
+                    System.out.println("t1-s1 permits: " + s1.availablePermits());
+                    System.out.println("t1-s2 permits: " + s2.availablePermits());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -29,6 +31,8 @@ public class ContinuousThreadSample {
             @Override
             public void run() {
                 try {
+                    System.out.println("t2-s1 permits: " + s1.availablePermits());
+                    System.out.println("t2-s2 permits: " + s2.availablePermits());
                     s1.acquire();
                     Thread.sleep(1500);
                     System.out.println("t2");
@@ -43,6 +47,8 @@ public class ContinuousThreadSample {
             @Override
             public void run() {
                 try {
+                    System.out.println("t3-s1 permits: " + s1.availablePermits());
+                    System.out.println("t3-s2 permits: " + s2.availablePermits());
                     s2.acquire();
                     Thread.sleep(2500);
                     System.out.println("t3");
@@ -53,7 +59,13 @@ public class ContinuousThreadSample {
         });
         try {
             s1.acquire();
+            System.out.println("main-s1 permits: " + s1.availablePermits());
+            System.out.println("main-s2 permits: " + s2.availablePermits());
+
             s2.acquire();
+
+            System.out.println("main0-s1 permits: " + s1.availablePermits());
+            System.out.println("main0-s2 permits: " + s2.availablePermits());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
