@@ -5,7 +5,7 @@ package com.six.patterns.bridge;
  * @date 2017-09-19
  * Copyright 2017 Six. All rights reserved.
  */
-public class UModem implements Modem {
+public class UModem implements ModemImplementation {
     @Override
     public void dial() {
         System.out.println("UModem dialing...");

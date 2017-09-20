@@ -1,6 +1,10 @@
 package com.six.patterns.bridge;
 
 /**
+ * New requirements:
+ * 1) Add dedicated modems which don't dial;
+ * 2) All modem clients are able to use the dedicated modems;
+ * 3) No changes are allowed in modem clients.
  * @author hellenxu
  * @date 2017-09-19
  * Copyright 2017 Six. All rights reserved.
