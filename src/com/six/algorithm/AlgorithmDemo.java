@@ -6,5 +6,7 @@ public class AlgorithmDemo {
         BucketSort.bucketSort(10, 6);
 
         BubbleSort.bubbleSort(6);
+
+        QuickSort.quickSort(6);
     }
 }

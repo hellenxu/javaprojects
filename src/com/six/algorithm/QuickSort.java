@@ -2,8 +2,13 @@ package com.six.algorithm;
 
 import java.util.Scanner;
 
+/**
+ * Big O: O(N*N) ~ O(NlogN)
+ * <p>
+ */
+
 public class QuickSort {
-    static int num[] = new int[20];
+    private static int num[] = new int[20];
     static void quickSort(int numbers) {
 
         System.out.println(String.format("Please enter %d numbers: ", numbers));
@@ -13,7 +18,12 @@ public class QuickSort {
             num[i] = scanner.nextInt();
         }
 
-        realQuickSort(0, numbers);
+        realQuickSort(0, numbers - 1);
+
+        System.out.println("sorted: ");
+        for(int i = 0; i < numbers; i ++) {
+            System.out.printf("%d;", num[i]);
+        }
     }
 
     private static void realQuickSort(int left, int right) {
