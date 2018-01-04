@@ -1,4 +1,4 @@
-package com.six.algorithm;
+package com.six.algorithm.sort;
 
 public class AlgorithmDemo {
 
