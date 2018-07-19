@@ -1,5 +1,6 @@
 package com.six.algorithm.search;
 
+
 /**
  * Created by Xiaolin on 2018-01-03.
  */
@@ -39,5 +40,20 @@ public class BinarySearch {
         return -1;
     }
 
+    //TODO
+    static int rotatedArray(int[] array, int value) {
 
+        return -1;
+    }
+
+    //TODO
+    static String sparseEmptyArray(String[] array, String value) {
+        return null;
+    }
+
+    //TODO
+    static int unKnownSizeArray(int[] array, int value) {
+
+        return -1;
+    }
 }
