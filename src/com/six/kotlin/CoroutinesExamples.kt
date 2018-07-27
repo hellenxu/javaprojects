@@ -22,12 +22,29 @@ import kotlinx.coroutines.experimental.runBlocking
 //    Thread.sleep(2000L)
 //}
 
+
+/**
+ * runBlocking example
+ */
+//fun main(args: Array<String>) = runBlocking<Unit> {
+//    launch(CommonPool) {
+//        delay(1000L)
+//        println("World!")
+//    }
+//
+//    print("Hello ")
+//    delay(2000L)
+//}
+
+/**
+ * Job example
+ */
 fun main(args: Array<String>) = runBlocking<Unit> {
-    launch(CommonPool) {
+    var job = launch(CommonPool) {
         delay(1000L)
         println("World!")
     }
 
     print("Hello ")
-    delay(2000L)
+    job.join()
 }
