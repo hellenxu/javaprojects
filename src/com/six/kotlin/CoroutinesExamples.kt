@@ -53,16 +53,37 @@ import kotlinx.coroutines.experimental.runBlocking
 /**
  * create suspending function
  */
+//fun main(args: Array<String>) = runBlocking<Unit>{
+//    val job = launch(CommonPool) {
+//        printWorld()
+//    }
+//
+//    print("Hello ")
+//    job.join()
+//}
+//
+//suspend fun printWorld() {
+//    delay(1000L)
+//    println("World!")
+//}
+
+
+/**
+ * cancel Coroutines example
+ */
 fun main(args: Array<String>) = runBlocking<Unit>{
+    //以下的job不断重复，直到完成重复次数1000或者主协程结束;
+    //主协程delay 1300L的过程中, job可以重复3次;然后job.cancel()被执行
     val job = launch(CommonPool) {
-        printWorld()
+        repeat(1000) {
+            println("I'm sleeping $it")
+            delay(500L)
+        }
     }
 
-    print("Hello ")
-    job.join()
-}
-
-suspend fun printWorld() {
-    delay(1000L)
-    println("World!")
+    delay(1300L)
+    println("main: I'm tired of waiting!")
+    job.cancel()
+    delay(1300L)
+    println("main: Now I can quit.")
 }
