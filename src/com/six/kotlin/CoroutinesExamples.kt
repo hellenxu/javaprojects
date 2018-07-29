@@ -39,12 +39,30 @@ import kotlinx.coroutines.experimental.runBlocking
 /**
  * Job example
  */
-fun main(args: Array<String>) = runBlocking<Unit> {
-    var job = launch(CommonPool) {
-        delay(1000L)
-        println("World!")
+//fun main(args: Array<String>) = runBlocking<Unit> {
+//    var job = launch(CommonPool) {
+//        delay(1000L)
+//        println("World!")
+//    }
+//
+//    print("Hello ")
+//    job.join()
+//}
+
+
+/**
+ * create suspending function
+ */
+fun main(args: Array<String>) = runBlocking<Unit>{
+    val job = launch(CommonPool) {
+        printWorld()
     }
 
     print("Hello ")
     job.join()
+}
+
+suspend fun printWorld() {
+    delay(1000L)
+    println("World!")
 }
