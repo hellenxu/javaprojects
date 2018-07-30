@@ -91,11 +91,36 @@ import kotlinx.coroutines.experimental.runBlocking
 /**
  * non-cancellable coroutines example
  */
+//fun main(args: Array<String>) = runBlocking<Unit>{
+//    val job = launch(CommonPool) {
+//        var nextPrintTime = 0L
+//        var i = 0
+//        while(i < 10) {
+//            val currentTime = System.currentTimeMillis()
+//            if(currentTime >= nextPrintTime) {
+//                println("I'm sleeping ${i++}")
+//                nextPrintTime = currentTime + 500L
+//            }
+//        }
+//    }
+//
+//    delay(1300L)
+//    println("main: I'm tired of waiting!")
+//    job.cancel()
+//    delay(1300L)
+//    println("main: Now I can quit.")
+//}
+
+
+/*
+* how to cancel non-cancellable coroutines:
+* use isActive to check the state of a job.
+* */
 fun main(args: Array<String>) = runBlocking<Unit>{
     val job = launch(CommonPool) {
         var nextPrintTime = 0L
         var i = 0
-        while(i < 10) {
+        while(isActive) {
             val currentTime = System.currentTimeMillis()
             if(currentTime >= nextPrintTime) {
                 println("I'm sleeping ${i++}")
@@ -110,4 +135,3 @@ fun main(args: Array<String>) = runBlocking<Unit>{
     delay(1300L)
     println("main: Now I can quit.")
 }
-
