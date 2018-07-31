@@ -1,9 +1,6 @@
 package com.six.kotlin
 
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.*
 
 //fun main(args: Array<String>) {
 //
@@ -116,15 +113,42 @@ import kotlinx.coroutines.experimental.runBlocking
 * how to cancel non-cancellable coroutines:
 * use isActive to check the state of a job.
 * */
+//fun main(args: Array<String>) = runBlocking<Unit>{
+//    val job = launch(CommonPool) {
+//        var nextPrintTime = 0L
+//        var i = 0
+//        while(isActive) {
+//            val currentTime = System.currentTimeMillis()
+//            if(currentTime >= nextPrintTime) {
+//                println("I'm sleeping ${i++}")
+//                nextPrintTime = currentTime + 500L
+//            }
+//        }
+//    }
+//
+//    delay(1300L)
+//    println("main: I'm tired of waiting!")
+//    job.cancel()
+//    delay(1300L)
+//    println("main: Now I can quit.")
+//}
+
+
+/*
+* run suspend function in NonCancellable context
+* */
 fun main(args: Array<String>) = runBlocking<Unit>{
     val job = launch(CommonPool) {
-        var nextPrintTime = 0L
-        var i = 0
-        while(isActive) {
-            val currentTime = System.currentTimeMillis()
-            if(currentTime >= nextPrintTime) {
-                println("I'm sleeping ${i++}")
-                nextPrintTime = currentTime + 500L
+        try {
+            repeat(1000) {
+                println("I'm sleeping $it")
+                delay(500L)
+            }
+        } finally {
+            run(NonCancellable) {
+                println("I'm running finally")
+                delay(1000L)
+                println("And I've just delayed for 1 sec because I'm non-cancellable.")
             }
         }
     }
