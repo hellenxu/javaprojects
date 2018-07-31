@@ -137,25 +137,45 @@ import kotlinx.coroutines.experimental.*
 /*
 * run suspend function in NonCancellable context
 * */
+//fun main(args: Array<String>) = runBlocking<Unit>{
+//    val job = launch(CommonPool) {
+//        try {
+//            repeat(1000) {
+//                println("I'm sleeping $it")
+//                delay(500L)
+//            }
+//        } finally {
+//            run(NonCancellable) {
+//                println("I'm running finally")
+//                delay(1000L)
+//                println("And I've just delayed for 1 sec because I'm non-cancellable.")
+//            }
+//        }
+//    }
+//
+//    delay(1300L)
+//    println("main: I'm tired of waiting!")
+//    job.cancel()
+//    delay(1300L)
+//    println("main: Now I can quit.")
+//}
+
+
+/*
+* withTimeout example
+* */
 fun main(args: Array<String>) = runBlocking<Unit>{
-    val job = launch(CommonPool) {
-        try {
+    try {
+        withTimeout(1300L) {
             repeat(1000) {
                 println("I'm sleeping $it")
                 delay(500L)
             }
-        } finally {
-            run(NonCancellable) {
-                println("I'm running finally")
-                delay(1000L)
-                println("And I've just delayed for 1 sec because I'm non-cancellable.")
-            }
         }
+    } catch (exception: TimeoutCancellationException) {
+        println("collecting logs...")
+    } finally {
+        println("handling finally block...")
     }
-
-    delay(1300L)
-    println("main: I'm tired of waiting!")
-    job.cancel()
-    delay(1300L)
-    println("main: Now I can quit.")
 }
+
