@@ -164,7 +164,7 @@ import kotlinx.coroutines.experimental.*
 /*
 * withTimeout example
 * */
-fun main(args: Array<String>) = runBlocking<Unit>{
+suspend fun timeOut() {
     try {
         withTimeout(1300L) {
             repeat(1000) {
@@ -178,4 +178,9 @@ fun main(args: Array<String>) = runBlocking<Unit>{
         println("handling finally block...")
     }
 }
+
+fun main(args: Array<String>) = runBlocking<Unit>{
+    timeOut()
+}
+
 
