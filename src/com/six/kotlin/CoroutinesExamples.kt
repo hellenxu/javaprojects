@@ -164,7 +164,7 @@ import kotlinx.coroutines.experimental.*
 /*
 * withTimeout example
 * */
-fun main(args: Array<String>) = runBlocking<Unit>{
+suspend fun timeOut() {
     try {
         withTimeout(1300L) {
             repeat(1000) {
@@ -178,4 +178,36 @@ fun main(args: Array<String>) = runBlocking<Unit>{
         println("handling finally block...")
     }
 }
+
+/*
+* Async operation
+* */
+fun getData(): Int {
+    Thread.sleep(4000)
+    println("xxl sleep over...")
+    return 100
+}
+
+fun refresh(value: Int) {
+    println("xxl: refresh $value")
+}
+
+
+fun requestAndRefresh() = runBlocking {
+    val jobA = async {
+        val job: Deferred<Int> = async(CommonPool) {
+            // do some time consuming operations, such as sending a network request and waiting for a response
+            getData()
+        }
+        refresh(job.await())
+    }
+
+    jobA.join()
+}
+
+fun main(args: Array<String>) = runBlocking<Unit>{
+//    timeOut()
+    requestAndRefresh()
+}
+
 
