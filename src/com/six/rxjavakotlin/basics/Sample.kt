@@ -1,5 +1,6 @@
 package com.six.rxjavakotlin.basics
 
+import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import java.util.*
@@ -12,6 +13,11 @@ fun main(args: Array<String>) {
     isUserExistSingle().subscribe({ response ->
         println("xxl-success: $response")
     }, {error -> println("xxl-$error")})
+
+    isUserExistCompletable().subscribe(
+            { println("xxl-onComplete: completable")},
+            { error -> println("xxl-$error")}
+    )
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -39,6 +45,18 @@ fun isUserExistSingle(): Single<String> {
             emitter.onSuccess("logged in: single")
         } else {
             emitter.onError(Error("http error: single"))
+        }
+    }
+}
+
+fun isUserExistCompletable(): Completable {
+    val random = Random()
+
+    return Completable.create {emitter ->
+        if(random.nextBoolean()) {
+            emitter.onComplete()
+        } else {
+            emitter.onError(Error("http error: completable"))
         }
     }
 }
