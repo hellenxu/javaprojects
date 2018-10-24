@@ -13,9 +13,14 @@ fun isUserExist(): Maybe<String> {
     val random = Random()
 
     return  Maybe.create {emitter ->
+        emitter.onComplete()
+
         if(random.nextBoolean()) {
+            if(!emitter.isDisposed)
             emitter.onSuccess("logged in")
+
         } else {
+            if(!emitter.isDisposed)
             emitter.onError(Error("http error"))
         }
     }
