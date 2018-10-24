@@ -1,23 +1,26 @@
 package com.six.rxjavakotlin.basics
 
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import java.util.*
 
 fun main(args: Array<String>) {
-    isUserExistMaybe().subscribe({ response ->
-        println("xxl-success: $response")
-    }, {error -> println("xxl-$error")}, { println("xxl-onComplete")})
+//    isUserExistMaybe().subscribe({ response ->
+//        println("xxl-success: $response")
+//    }, {error -> println("xxl-$error")}, { println("xxl-onComplete")})
+//
+//    isUserExistSingle().subscribe({ response ->
+//        println("xxl-success: $response")
+//    }, {error -> println("xxl-$error")})
+//
+//    isUserExistCompletable().subscribe(
+//            { println("xxl-onComplete: completable")},
+//            { error -> println("xxl-$error")}
+//    )
 
-    isUserExistSingle().subscribe({ response ->
-        println("xxl-success: $response")
-    }, {error -> println("xxl-$error")})
-
-    isUserExistCompletable().subscribe(
-            { println("xxl-onComplete: completable")},
-            { error -> println("xxl-$error")}
-    )
+    completableAndThen()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -59,4 +62,14 @@ fun isUserExistCompletable(): Completable {
             emitter.onError(Error("http error: completable"))
         }
     }
+}
+
+fun completableAndThen() {
+    Completable.create { emitter ->
+        emitter.onComplete()
+    }
+            .andThen(Flowable.range(1, 10))
+            .subscribe {
+                println("xxl-completable: $it")
+            }
 }
