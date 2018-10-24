@@ -1,9 +1,8 @@
 package com.six.rxjavakotlin.basics
 
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Maybe
-import io.reactivex.Single
+import io.reactivex.*
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 fun main(args: Array<String>) {
@@ -20,7 +19,8 @@ fun main(args: Array<String>) {
 //            { error -> println("xxl-$error")}
 //    )
 
-    completableAndThen()
+//    completableAndThen()
+    backPressure()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -72,4 +72,19 @@ fun completableAndThen() {
             .subscribe {
                 println("xxl-completable: $it")
             }
+}
+
+fun backPressure() {
+    val observable = PublishSubject.create<Int>()
+    observable.toFlowable(BackpressureStrategy.MISSING)
+            .observeOn(Schedulers.computation())
+            .subscribe({
+                println("xxl-onNext: $it")
+            }, {
+                println("xxl-onError: $it")
+            })
+
+    for(i in 0..200000000) {
+        observable.onNext(i)
+    }
 }
