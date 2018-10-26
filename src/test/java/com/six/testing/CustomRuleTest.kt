@@ -1,9 +1,9 @@
 package com.six.testing
 
+import junit.framework.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import rules.TestNameRule
-import kotlin.test.assertTrue
 
 /**
  * @author hellenxu

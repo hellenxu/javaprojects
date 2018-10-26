@@ -3,6 +3,8 @@ package com.six.rxjavakotlin.basics
 import io.reactivex.*
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 import java.util.*
 
 fun main(args: Array<String>) {
@@ -20,7 +22,8 @@ fun main(args: Array<String>) {
 //    )
 
 //    completableAndThen()
-    backPressure()
+//    backPressure()
+    flowable()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -87,4 +90,35 @@ fun backPressure() {
     for(i in 0..200000000) {
         observable.onNext(i)
     }
+}
+
+//flowable backPressure strategy
+fun flowable() {
+    val subscriber = object : Subscriber<Int> {
+        var subscription: Subscription? = null
+
+        override fun onComplete() {
+            println("xxl-flowable-onComplete")
+        }
+
+        override fun onSubscribe(s: Subscription?) {
+            subscription = s
+            subscription?.request(1)
+            println("xxl-subscription: $s")
+        }
+
+        override fun onNext(t: Int?) {
+            subscription?.request(1)
+            println("xxl-onNext: $t")
+        }
+
+        override fun onError(t: Throwable?) {
+            println("xxl-onError: $t")
+        }
+
+    }
+
+    Flowable.range(0, 15)
+            .subscribe(subscriber)
+
 }
