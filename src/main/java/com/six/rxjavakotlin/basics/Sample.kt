@@ -168,11 +168,17 @@ fun create() {
 
 fun takeSample() {
     val data = arrayOf("t0", "", "", "t1", "", "t2", "t3")
-    Observable.just(
-        data.filter {
-            it.isNotEmpty()
-        }.take(2)
-    ).subscribe {
-        println("xxl-result: $it")
-    }
+    Observable.fromArray(*data)
+            .filter {
+                it.length >= 2
+            }.subscribe {
+                println("xxl-result: $it")
+            }
+//    Observable.just(
+//        data.filter {
+//            it.isNotEmpty()
+//        }.take(2)
+//    ).subscribe {
+//        println("xxl-result: $it")
+//    }
 }

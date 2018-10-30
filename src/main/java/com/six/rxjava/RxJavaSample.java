@@ -10,29 +10,35 @@ import java.util.List;
  */
 public class RxJavaSample {
     private static void change(){
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Observable.fromIterable(list)
-                .filter(i -> i % 2 == 0)
-                .subscribe(System.out::println);
-
-        Observable.range(1, 6)
-                .filter(i -> i % 2 == 0)
-                .subscribe(System.out::println);
-
-        Observable.range(0, 2)
-                .doAfterNext(i -> System.out.println("i: " + i))
-                .flatMap(index -> Observable.range(0, 3))
-                .doOnNext(j -> System.out.println("j: " + j))
-                .subscribe();
-
-        String data = "Hello";
-        Observable.just(data)
-                .subscribe(System.out::println);
-
-        Integer i = 50;
-        boolean b = true;
-        Observable.just(data, i, b)
-                .subscribe(System.out::println);
+//        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+//        Observable.fromIterable(list)
+//                .filter(i -> i % 2 == 0)
+//                .subscribe(System.out::println);
+//
+//        Observable.range(1, 6)
+//                .filter(i -> i % 2 == 0)
+//                .subscribe(System.out::println);
+//
+//        Observable.range(0, 2)
+//                .doAfterNext(i -> System.out.println("i: " + i))
+//                .flatMap(index -> Observable.range(0, 3))
+//                .doOnNext(j -> System.out.println("j: " + j))
+//                .subscribe();
+//
+//        String data = "Hello";
+//        Observable.just(data)
+//                .subscribe(System.out::println);
+//
+//        Integer i = 50;
+//        boolean b = true;
+//        Observable.just(data, i, b)
+//                .subscribe(System.out::println);
+        String[] ary = new String[]{"t", "ere", "3333", "", "098"};
+        Observable.fromArray(ary)
+                .filter(s -> s.length() > 2)
+                .take(2)
+                .subscribe(strings -> System.out.println("xxl-result: " + strings))
+                .dispose();
     }
 
     public static void main(String[] args){
