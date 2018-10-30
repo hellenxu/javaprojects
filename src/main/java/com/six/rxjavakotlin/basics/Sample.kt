@@ -27,7 +27,9 @@ fun main(args: Array<String>) {
 //    flowable()
 //    nestedLoop()
 //    justSample()
-    create()
+//    create()
+
+    takeSample()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -151,8 +153,8 @@ fun justSample() {
             }
 }
 
-fun create(){
-    Observable.create<String> {emitter ->
+fun create() {
+    Observable.create<String> { emitter ->
         emitter.onNext("te1")
         emitter.onNext("te6")
         emitter.onNext("te5")
@@ -164,3 +166,13 @@ fun create(){
     }.dispose()
 }
 
+fun takeSample() {
+    val data = arrayOf("t0", "", "", "t1", "", "t2", "t3")
+    Observable.just(
+        data.filter {
+            it.isNotEmpty()
+        }.take(2)
+    ).subscribe {
+        println("xxl-result: $it")
+    }
+}
