@@ -25,7 +25,8 @@ fun main(args: Array<String>) {
 //    completableAndThen()
 //    backPressure()
 //    flowable()
-    nestedLoop()
+//    nestedLoop()
+    justSample()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -137,3 +138,15 @@ fun nestedLoop() {
                         }
             }.subscribe()
 }
+
+fun justSample() {
+    val data = "hello hah"
+    Observable.just(data)
+            .subscribe { println("xxl-just-item: $it") }
+
+    Observable.just(data, true, Arrays.asList(1, 3, 5, 7, 9), Cici("title1", "history00"))
+            .subscribe {
+                println("xxl-just-multiple-item: $it")
+            }
+}
+
