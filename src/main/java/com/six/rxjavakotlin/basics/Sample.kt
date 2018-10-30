@@ -1,6 +1,7 @@
 package com.six.rxjavakotlin.basics
 
 import io.reactivex.*
+import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import org.reactivestreams.Subscriber
@@ -23,7 +24,8 @@ fun main(args: Array<String>) {
 
 //    completableAndThen()
 //    backPressure()
-    flowable()
+//    flowable()
+    nestedLoop()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -121,4 +123,17 @@ fun flowable() {
     Flowable.range(0, 15)
             .subscribe(subscriber)
 
+}
+
+fun nestedLoop() {
+    Observable.range(0, 2)
+            .doAfterNext {
+                println("xxl-layer1: $it")
+            }.flatMap { index ->
+                println("xxl-index: $index")
+                Observable.range(0, 3)
+                        .doOnNext { j ->
+                            println("xxl-layer2: $j")
+                        }
+            }.subscribe()
 }
