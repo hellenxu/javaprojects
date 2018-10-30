@@ -26,7 +26,8 @@ fun main(args: Array<String>) {
 //    backPressure()
 //    flowable()
 //    nestedLoop()
-    justSample()
+//    justSample()
+    create()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -148,5 +149,18 @@ fun justSample() {
             .subscribe {
                 println("xxl-just-multiple-item: $it")
             }
+}
+
+fun create(){
+    Observable.create<String> {emitter ->
+        emitter.onNext("te1")
+        emitter.onNext("te6")
+        emitter.onNext("te5")
+        emitter.onNext("te4")
+        emitter.onComplete()
+
+    }.subscribe {
+        println("xxl-onNext: $it")
+    }.dispose()
 }
 
