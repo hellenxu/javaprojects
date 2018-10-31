@@ -32,7 +32,8 @@ fun main(args: Array<String>) {
 //    takeSample()
 //    repeat()
 //    timer()
-    delayExample()
+//    delayExample()
+    intervalSam()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -207,4 +208,11 @@ fun delayExample() {
     Observable.just("delay()")
             .delay(3, TimeUnit.SECONDS, Schedulers.trampoline())
             .subscribe { println("xxl-subscribe: $it") }
+}
+
+fun intervalSam() {
+    Observable.interval(2, TimeUnit.SECONDS, Schedulers.trampoline())
+            .subscribe {
+                println("xxl-interval: $it")
+            }
 }
