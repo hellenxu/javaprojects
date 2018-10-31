@@ -28,8 +28,8 @@ fun main(args: Array<String>) {
 //    nestedLoop()
 //    justSample()
 //    create()
-
-    takeSample()
+//    takeSample()
+    repeat()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -182,3 +182,12 @@ fun takeSample() {
 //        println("xxl-result: $it")
 //    }
 }
+
+fun repeat() {
+    Observable.just("te2", "to0", "te3")
+            .repeat(2)
+            .subscribe {
+                println("xxl-item: $it")
+            }
+}
+
