@@ -33,7 +33,8 @@ fun main(args: Array<String>) {
 //    repeat()
 //    timer()
 //    delayExample()
-    intervalSam()
+//    intervalSam()
+    takeWhileSam()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -215,4 +216,17 @@ fun intervalSam() {
             .subscribe {
                 println("xxl-interval: $it")
             }
+}
+
+//takeWhile == take until the condition is not satisfied;
+//filter == filter items that doesn’t satisfy the condition.
+fun takeWhileSam() {
+    val data = arrayOf("ab", "5", "ad", "bb0", "ca9", "da")
+    Observable.fromArray(*data)
+            .takeWhile {it.length > 1}
+            .subscribe { println("xxl-chosen: $it") }
+
+    Observable.fromArray(*data)
+            .filter { it.length > 2 }
+            .subscribe { println("xxl-filtered: $it") }
 }
