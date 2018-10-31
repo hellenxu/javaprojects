@@ -7,6 +7,7 @@ import io.reactivex.subjects.PublishSubject
 import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
 //    isUserExistMaybe().subscribe({ response ->
@@ -29,7 +30,8 @@ fun main(args: Array<String>) {
 //    justSample()
 //    create()
 //    takeSample()
-    repeat()
+//    repeat()
+    timer()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -189,5 +191,14 @@ fun repeat() {
             .subscribe {
                 println("xxl-item: $it")
             }
+}
+
+fun timer() {
+    Observable.timer(3, TimeUnit.SECONDS, Schedulers.trampoline())
+            .flatMap {
+                println("xxl-timer: $it")
+                Observable.just("timer00")
+            }
+            .subscribe { println("xxl-subscribe: $it") }
 }
 
