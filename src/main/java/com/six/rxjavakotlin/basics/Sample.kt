@@ -39,7 +39,8 @@ fun main(args: Array<String>) {
 //    concatCheck()
 //    zipSample()
 //    mergeSample()
-    scanSample()
+//    scanSample()
+    distinct()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -300,5 +301,19 @@ fun scanSample() {
             .scan { sum: Int, item: Int -> sum + item }
             .subscribe {
                 println("xxl-subscribe: $it")
+            }
+}
+
+fun distinct() {
+    Observable.just(1, 2, 3, 4,4, 5, 6)
+            .distinct()
+            .subscribe {
+                println("xxl-distinct-filtered: $it")
+            }
+
+    Observable.just(1, 2, 3, 4,4, 3, 6)
+            .distinctUntilChanged()
+            .subscribe {
+                println("xxl-distinctUntilChanged: $it")
             }
 }
