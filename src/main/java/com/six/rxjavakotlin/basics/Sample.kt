@@ -34,7 +34,8 @@ fun main(args: Array<String>) {
 //    timer()
 //    delayExample()
 //    intervalSam()
-    takeWhileSam()
+//    takeWhileSam()
+    concatCheck()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -229,4 +230,39 @@ fun takeWhileSam() {
     Observable.fromArray(*data)
             .filter { it.length > 2 }
             .subscribe { println("xxl-filtered: $it") }
+}
+
+fun concatCheck() {
+    val seed = Random()
+    val isFromMemory = seed.nextBoolean()
+    var isFromDisk = false
+
+    val memoryObservable = Observable.create<String> {
+        if(isFromMemory){
+            it.onNext("memory cached")
+            println("xxl-memory-onNext")
+        } else {
+            isFromDisk = true
+            it.onComplete()
+            println("xxl-memory-onComplete")
+        }
+    }
+
+    val diskObservable = Observable.create<String> {
+        if(isFromDisk && seed.nextBoolean()) {
+            it.onNext("disk cached")
+            println("xxl-disk-onNext")
+        } else {
+            it.onComplete()
+            println("xxl-disk-onComplete")
+        }
+    }
+
+    val netObservable = Observable.just("net fetching...")
+
+    Observable.concat(memoryObservable, diskObservable, netObservable)
+            .subscribe {
+                println("xxl-result: $it")
+            }
+
 }
