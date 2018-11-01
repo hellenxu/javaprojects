@@ -38,7 +38,8 @@ fun main(args: Array<String>) {
 //    takeWhileSam()
 //    concatCheck()
 //    zipSample()
-    mergeSample()
+//    mergeSample()
+    scanSample()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -291,5 +292,13 @@ fun mergeSample() {
     Observable.merge(ob1, ob2)
             .subscribe {
                 println("xxl-merge: $it")
+            }
+}
+
+fun scanSample() {
+    Observable.just(1, 3, 5, 7, 9)
+            .scan { sum: Int, item: Int -> sum + item }
+            .subscribe {
+                println("xxl-subscribe: $it")
             }
 }
