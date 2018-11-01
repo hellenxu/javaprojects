@@ -37,7 +37,8 @@ fun main(args: Array<String>) {
 //    intervalSam()
 //    takeWhileSam()
 //    concatCheck()
-    zipSample()
+//    zipSample()
+    mergeSample()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -282,4 +283,13 @@ fun zipSample() {
                 }
                 resultList
             }).subscribe { result -> println("xxl-size: ${result.size}") }
+}
+
+fun mergeSample() {
+    val ob1 = Observable.just("098")
+    val ob2 = Observable.just("345")
+    Observable.merge(ob1, ob2)
+            .subscribe {
+                println("xxl-merge: $it")
+            }
 }
