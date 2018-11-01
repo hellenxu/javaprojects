@@ -2,6 +2,7 @@ package com.six.rxjavakotlin.basics
 
 import io.reactivex.*
 import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import org.reactivestreams.Subscriber
@@ -35,7 +36,8 @@ fun main(args: Array<String>) {
 //    delayExample()
 //    intervalSam()
 //    takeWhileSam()
-    concatCheck()
+//    concatCheck()
+    zipSample()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -265,4 +267,19 @@ fun concatCheck() {
                 println("xxl-result: $it")
             }
 
+}
+
+fun zipSample() {
+    val array1 = arrayOf("ac", "erw", "er")
+    val array2 = arrayOf("ba", "tt")
+    Observable.zip(Observable.fromArray(array1),
+            Observable.fromArray(array2),
+            BiFunction<Array<String>, Array<String>, ArrayList<String>> { t1, t2 ->
+                val minSize = Math.min(t1.size, t2.size)
+                val resultList = ArrayList<String>()
+                for (i in 0 until minSize) {
+                    resultList.add(t1[i] + t2[i])
+                }
+                resultList
+            }).subscribe { result -> println("xxl-size: ${result.size}") }
 }
