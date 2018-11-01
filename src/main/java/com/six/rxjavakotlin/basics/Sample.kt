@@ -40,7 +40,8 @@ fun main(args: Array<String>) {
 //    zipSample()
 //    mergeSample()
 //    scanSample()
-    distinct()
+//    distinct()
+    groupBy()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -315,5 +316,16 @@ fun distinct() {
             .distinctUntilChanged()
             .subscribe {
                 println("xxl-distinctUntilChanged: $it")
+            }
+}
+
+fun groupBy() {
+    Observable.range(0, 4)
+            .groupBy { num -> num % 2 ==0}
+            .subscribe { mapOb ->
+                mapOb.subscribe {
+                    println("xxl-key: ${mapOb.key}")
+                    println("xxl-value: $it")
+                }
             }
 }
