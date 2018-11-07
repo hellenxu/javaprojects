@@ -41,7 +41,8 @@ fun main(args: Array<String>) {
 //    mergeSample()
 //    scanSample()
 //    distinct()
-    groupBy()
+//    groupBy()
+    debounce()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -327,5 +328,14 @@ fun groupBy() {
                     println("xxl-key: ${mapOb.key}")
                     println("xxl-value: $it")
                 }
+            }
+}
+
+//only emit an item from an Observable if a particular timespan has passed without it emitting another item.
+fun debounce() {
+    Flowable.range(0, 200000)
+            .debounce(1, TimeUnit.MICROSECONDS)
+            .subscribe {
+                println("xxl-debounce: $it")
             }
 }
