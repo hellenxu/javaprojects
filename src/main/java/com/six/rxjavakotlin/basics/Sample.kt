@@ -42,7 +42,8 @@ fun main(args: Array<String>) {
 //    scanSample()
 //    distinct()
 //    groupBy()
-    debounce()
+//    debounce()
+    countDown()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -338,4 +339,21 @@ fun debounce() {
             .subscribe {
                 println("xxl-debounce: $it")
             }
+}
+
+private var count = 0
+
+private fun countDown() {
+    Observable.create(ObservableOnSubscribe<String> {
+        Schedulers.trampoline().createWorker().schedulePeriodically({
+            it.onNext(increaseCount())
+        }, 0, 1, TimeUnit.SECONDS)
+    }).take(10).subscribe {
+        println("xxl-countDown: $it")
+    }
+}
+
+private fun increaseCount(): String {
+    count ++
+    return count.toString()
 }
