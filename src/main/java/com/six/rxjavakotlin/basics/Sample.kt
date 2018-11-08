@@ -3,6 +3,7 @@ package com.six.rxjavakotlin.basics
 import io.reactivex.*
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import org.reactivestreams.Subscriber
@@ -44,7 +45,8 @@ fun main(args: Array<String>) {
 //    groupBy()
 //    debounce()
 //    countDown()
-    onErrorReturn()
+//    onErrorReturn()
+    onErrorResumeNext()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -373,4 +375,19 @@ private fun onErrorReturn() {
             .subscribe {
                 println("xxl-errorReturn: $it")
             }
+}
+
+private fun onErrorResumeNext() {
+    Observable.just(1, 10, 15)
+            .map {item ->
+                item/0
+            }
+            .onErrorResumeNext(Function {
+                println("xxl-errorResume")
+                Observable.just(100)
+            })
+            .subscribe {
+                println("xxl-subscribe: $it")
+            }
+
 }
