@@ -46,7 +46,8 @@ fun main(args: Array<String>) {
 //    debounce()
 //    countDown()
 //    onErrorReturn()
-    onErrorResumeNext()
+//    onErrorResumeNext()
+    maybeErrorReturn()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -386,6 +387,22 @@ private fun onErrorResumeNext() {
                 println("xxl-errorResume")
                 Observable.just(100)
             })
+            .subscribe {
+                println("xxl-subscribe: $it")
+            }
+
+}
+
+//another way to handle maybe error
+private fun maybeErrorReturn() {
+    Maybe.just(1)
+            .map { item ->
+                item/0
+            }
+            .onErrorReturn {
+                println("xxl-error-return: $it")
+                10
+            }
             .subscribe {
                 println("xxl-subscribe: $it")
             }
