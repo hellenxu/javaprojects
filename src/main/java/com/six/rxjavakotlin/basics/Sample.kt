@@ -43,7 +43,8 @@ fun main(args: Array<String>) {
 //    distinct()
 //    groupBy()
 //    debounce()
-    countDown()
+//    countDown()
+    onErrorReturn()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -356,4 +357,20 @@ private fun countDown() {
 private fun increaseCount(): String {
     count ++
     return count.toString()
+}
+
+
+private fun onErrorReturn() {
+    val data = arrayOf(1, 4, 6, 10, 15)
+    Observable.fromArray(*data)
+            .map {
+                it/0
+            }
+            .onErrorReturn{error ->
+                println("xxl-errorReturn: $error")
+                111
+            }
+            .subscribe {
+                println("xxl-errorReturn: $it")
+            }
 }
