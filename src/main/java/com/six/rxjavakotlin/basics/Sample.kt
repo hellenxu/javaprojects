@@ -47,7 +47,8 @@ fun main(args: Array<String>) {
 //    countDown()
 //    onErrorReturn()
 //    onErrorResumeNext()
-    maybeErrorReturn()
+//    maybeErrorReturn()
+    irrelevantInstance()
 }
 
 fun isUserExistMaybe(): Maybe<String> {
@@ -407,4 +408,24 @@ private fun maybeErrorReturn() {
                 println("xxl-subscribe: $it")
             }
 
+}
+
+enum class Irrelevant{INSTANCE}
+
+//Observable<Void> can no longer emit any values but only terminate normally or with an exception.
+
+private fun irrelevantInstance() {
+    val source = Observable.create<Any> { emitter ->
+
+        println("xxl-side-effect 1")
+        emitter.onNext(Irrelevant.INSTANCE)
+
+        println("xxl-side-effect 2")
+        emitter.onNext(Irrelevant.INSTANCE)
+
+        println("xxl-side-effect 3")
+        emitter.onNext(Irrelevant.INSTANCE)
+    }
+
+    source.subscribe({ println("xxl-onNext: $it") }, { println("xxl-onError: $it") })
 }
