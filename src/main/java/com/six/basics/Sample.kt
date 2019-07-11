@@ -1,4 +1,4 @@
-package com.six.rxjavakotlin.basics
+package com.six.basics
 
 import io.reactivex.*
 import io.reactivex.Observable

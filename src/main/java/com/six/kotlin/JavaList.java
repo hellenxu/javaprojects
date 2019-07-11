@@ -1,4 +1,4 @@
-package main.java.com.six.kotlin;
+package com.six.kotlin;
 
 import java.util.ArrayList;
 import java.util.List;
