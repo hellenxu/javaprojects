@@ -25,6 +25,23 @@ public class ReentrantLockSample {
         Thread thread2 = new TryLock(lock);
         thread2.setName("thread2");
         thread2.start();
+
+        // Console print result:
+        /*
+        xxl-try-lock: thread1
+        xxl-success: thread1
+        xxl-sleep: thread1
+        xxl-try-lock: thread2
+        xxl-try-lock-timeout: thread2
+        xxl-unlock: thread2
+        Exception in thread "thread2" java.lang.IllegalMonitorStateException
+        at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:151)
+        at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1261)
+        at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:457)
+        at com.six.thread.ReentrantLockSample$TryLock.run(ReentrantLockSample.java:86)
+        xxl-woke-up: thread1
+        xxl-unlock: thread1
+        * */
     }
 
     static class WaitRunnable implements Runnable {
