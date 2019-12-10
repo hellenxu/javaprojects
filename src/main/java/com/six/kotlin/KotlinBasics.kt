@@ -26,6 +26,13 @@ fun main() {
     }
     println("xxl-also: $alsoReturnValue")
 
+    // with
+    with(user) {
+        this.id = "0000"
+        this.name = "test3"
+    }
+    println("xxl-with: $user")
+
 }
 
 data class User(var id: String = "", var name: String = "")
