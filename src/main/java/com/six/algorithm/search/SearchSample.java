@@ -1,4 +1,4 @@
-package com.six.algorithm.search;
+package main.java.com.six.algorithm.search;
 
 /**
  * Created by Xiaolin on 2018-01-03.

@@ -1,4 +1,4 @@
-package com.six.thread;
+package main.java.com.six.thread;
 
 /**
  * This example use Thread.join() to implement thread running in order.

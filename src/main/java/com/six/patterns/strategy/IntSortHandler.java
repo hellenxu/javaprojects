@@ -1,4 +1,4 @@
-package com.six.patterns.strategy;
+package main.java.com.six.patterns.strategy;
 
 /**
  * @author hellenxu

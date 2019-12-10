@@ -1,4 +1,4 @@
-package com.six.datastructure.linkedlist;
+package main.java.com.six.datastructure.linkedlist;
 
 /**
  * this linked list stores int only.

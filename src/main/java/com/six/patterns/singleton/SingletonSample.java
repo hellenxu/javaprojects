@@ -1,4 +1,4 @@
-package com.six.patterns.singleton;
+package main.java.com.six.patterns.singleton;
 
 /**
  * Example of Singleton Pattern

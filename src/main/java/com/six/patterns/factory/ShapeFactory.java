@@ -1,4 +1,4 @@
-package com.six.patterns.factory;
+package main.java.com.six.patterns.factory;
 
 /**
  * Factories can be of great benefit in conforming to DIP and also make it possible to swap in completely

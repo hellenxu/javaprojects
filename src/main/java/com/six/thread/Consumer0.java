@@ -1,4 +1,4 @@
-package com.six.thread;
+package main.java.com.six.thread;
 
 /**
  * Created by Xiaolin on 2017-08-15.

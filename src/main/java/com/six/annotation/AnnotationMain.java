@@ -1,4 +1,4 @@
-package com.six.annotation;
+package main.java.com.six.annotation;
 
 import java.lang.reflect.Method;
 

@@ -1,4 +1,4 @@
-package com.six.datastructure.stack;
+package main.java.com.six.datastructure.stack;
 
 
 import java.util.Scanner;

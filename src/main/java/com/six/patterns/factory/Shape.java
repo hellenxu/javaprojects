@@ -1,4 +1,4 @@
-package com.six.patterns.factory;
+package main.java.com.six.patterns.factory;
 
 /**
  * @author hellenxu

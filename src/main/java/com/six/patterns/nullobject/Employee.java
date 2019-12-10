@@ -1,4 +1,4 @@
-package com.six.patterns.nullobject;
+package main.java.com.six.patterns.nullobject;
 
 import java.util.Date;
 

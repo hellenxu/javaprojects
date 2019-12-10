@@ -1,4 +1,4 @@
-package com.six.patterns.templatemethod;
+package main.java.com.six.patterns.templatemethod;
 
 /**
  * @author hellenxu

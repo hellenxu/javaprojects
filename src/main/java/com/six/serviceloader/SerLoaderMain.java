@@ -1,4 +1,4 @@
-package com.six.serviceloader;
+package main.java.com.six.serviceloader;
 
 import java.util.ServiceLoader;
 

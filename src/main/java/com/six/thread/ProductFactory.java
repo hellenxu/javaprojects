@@ -1,4 +1,4 @@
-package com.six.thread;
+package main.java.com.six.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

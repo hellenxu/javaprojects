@@ -1,4 +1,4 @@
-package com.six.datastructure.queue;
+package main.java.com.six.datastructure.queue;
 
 public class QueueDemo {
 

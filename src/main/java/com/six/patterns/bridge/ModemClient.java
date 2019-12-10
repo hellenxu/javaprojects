@@ -1,4 +1,4 @@
-package com.six.patterns.bridge;
+package main.java.com.six.patterns.bridge;
 
 /**
  * New requirements:

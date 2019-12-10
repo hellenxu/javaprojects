@@ -1,4 +1,4 @@
-package com.six.datastructure.linkedlist;
+package main.java.com.six.datastructure.linkedlist;
 
 /**
  * @author hellenxu

@@ -1,4 +1,4 @@
-package com.six.annotation;
+package main.java.com.six.annotation;
 
 /**
  * Created by hellenxu on 16/3/30.

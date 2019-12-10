@@ -1,4 +1,4 @@
-package com.six.algorithm.search;
+package main.java.com.six.algorithm.search;
 
 import javax.swing.text.html.HTML;
 

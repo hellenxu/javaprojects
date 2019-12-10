@@ -1,4 +1,4 @@
-package com.six.annotation;
+package main.java.com.six.annotation;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;

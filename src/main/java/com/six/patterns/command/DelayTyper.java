@@ -1,4 +1,4 @@
-package com.six.patterns.command;
+package main.java.com.six.patterns.command;
 
 /**
  * @author hellenxu

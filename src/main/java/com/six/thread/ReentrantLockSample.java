@@ -1,4 +1,4 @@
-package com.six.thread;
+package main.java.com.six.thread;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;

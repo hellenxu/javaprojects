@@ -1,4 +1,4 @@
-package com.six.patterns.singleton;
+package main.java.com.six.patterns.singleton;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
