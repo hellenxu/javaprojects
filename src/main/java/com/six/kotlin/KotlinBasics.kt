@@ -56,6 +56,11 @@ fun main() {
     println("xxl-apply: $user")
     println("xxl-apply: $applyReturnValue")
 
+    val manager = AddressManager()
+    val address = manager.man?.address ?: "null-address"
+    println("xxl-man-street: $address")
 }
 
 data class User(var id: String = "", var name: String = "")
+
+data class Man(val id: String? = null, val address: Address? = null)
