@@ -1,5 +1,7 @@
 package main.java.com.six.kotlin
 
+import kotlin.properties.Delegates
+
 /**
  * @author hellenxu
  * @date 2019-12-09
@@ -59,6 +61,16 @@ fun main() {
     val manager = AddressManager()
     val address = manager.man?.address ?: "null-address"
     println("xxl-man-street: $address")
+
+    var vetoableInt: Int by Delegates.vetoable(0) { _, oldValue, newValue ->
+        oldValue < newValue
+    }
+
+    println("vetoableInt = $vetoableInt")
+    vetoableInt = 5
+    println("vetoableInt = $vetoableInt")
+    vetoableInt = 2
+    println("vetoableInt = $vetoableInt")
 }
 
 data class User(var id: String = "", var name: String = "")
