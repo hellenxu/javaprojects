@@ -71,8 +71,28 @@ fun main() {
     println("vetoableInt = $vetoableInt")
     vetoableInt = 2
     println("vetoableInt = $vetoableInt")
+
+    println("xxl-function literals with receiver - one: ${10.oneOrTwo { returnOne() }}")
+    println("xxl-function literals with receiver - two: ${10.oneOrTwo { returnTwo() }}")
 }
 
 data class User(var id: String = "", var name: String = "")
 
 data class Man(val id: String? = null, val address: Address? = null)
+
+
+class FunctionContainer {
+    fun returnOne(): Int {
+        return 1
+    }
+
+    fun returnTwo(): Int {
+        return 2
+    }
+}
+
+fun Int.oneOrTwo(block: FunctionContainer.() -> Int): Int {
+    FunctionContainer().also {
+        return it.block()
+    }
+}
