@@ -74,6 +74,19 @@ fun main() {
 
     println("xxl-function literals with receiver - one: ${10.oneOrTwo { returnOne() }}")
     println("xxl-function literals with receiver - two: ${10.oneOrTwo { returnTwo() }}")
+
+    /**
+     * {input ->
+     *   println("xxl-alias: ${input()}")
+     * }
+     * is a method without return value
+     * and input is a method returning a string
+     * input() is used to get its return value
+     */
+    val aliasType = TypeAliasSample {input ->
+        println("xxl-alias: ${input()}")
+    }
+    aliasType.output()
 }
 
 data class User(var id: String = "", var name: String = "")
@@ -96,3 +109,12 @@ fun Int.oneOrTwo(block: FunctionContainer.() -> Int): Int {
         return it.block()
     }
 }
+
+class TypeAliasSample(private val input: GetItemString) {
+    fun output() {
+        println("xxl-TypeAliasSample-output: ${input {"12314"}}")
+    }
+}
+
+typealias NestedString = () -> String
+typealias GetItemString = (NestedString) -> Unit
