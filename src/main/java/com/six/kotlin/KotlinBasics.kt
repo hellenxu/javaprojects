@@ -82,6 +82,10 @@ fun main() {
      * is a method without return value
      * and input is a method returning a string
      * input() is used to get its return value
+     *
+     * output:
+     * xxl-alias: 12314
+     * xxl-TypeAliasSample-output: kotlin.Unit
      */
     val aliasType = TypeAliasSample {input ->
         println("xxl-alias: ${input()}")
