@@ -8,7 +8,8 @@ package main.java.com.six.algorithm
 
 fun main() {
     println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
-    println("xxl-check-unique-one: ${checkUniqueTwo("qoqu34arouecnq")}")
+    println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
+    println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
 }
 
 // solution one: nested iteration and compare
@@ -47,3 +48,21 @@ fun checkUniqueTwo(input: String): Boolean {
     println("xxl-unique-two-cost: ${System.currentTimeMillis() - start} ms")
     return true
 }
+
+// solution three: use an array [assume it only includes standard ASCII]
+// Big O: N
+fun checkUniqueThree(input: String): Boolean {
+    val start = System.currentTimeMillis()
+    val tmp = Array(128) {false}
+    for (i in input) {
+        val index = i.toInt()
+        if (tmp[index]) {
+            println("xxl-unique-three-cost: ${System.currentTimeMillis() - start} ms")
+            return false
+        }
+        tmp[index] = true
+    }
+    println("xxl-unique-three-cost: ${System.currentTimeMillis() - start} ms")
+    return true
+}
+
