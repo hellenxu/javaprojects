@@ -1,5 +1,8 @@
 package main.java.com.six.algorithm
 
+import io.reactivex.Maybe
+import io.reactivex.MaybeEmitter
+
 /**
  * @author hellenxu
  * @date 2020-02-04
@@ -10,6 +13,27 @@ fun main() {
     println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
     println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
     println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
+
+    /**
+     * with return
+     * xxl-error: java.lang.Throwable: 2
+     * without return
+     * xxl-error: java.lang.Throwable: 2
+     * xxl-middle
+     */
+    Maybe.create<Int> { emitter ->
+        if (true) {
+            emitter.onError(Throwable("2"))
+            return@create
+        }
+        println("xxl-middle")
+        emitter.onSuccess(1)
+    }
+        .subscribe({
+            println("xxl-success: $it")
+        }, {
+            println("xxl-error: $it")
+        })
 }
 
 // solution one: nested iteration and compare

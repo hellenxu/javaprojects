@@ -1,5 +1,6 @@
 package main.java.com.six.rxjava;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 import java.util.Arrays;
