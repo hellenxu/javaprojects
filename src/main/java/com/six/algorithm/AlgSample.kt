@@ -1,7 +1,6 @@
 package main.java.com.six.algorithm
 
 import io.reactivex.Maybe
-import io.reactivex.MaybeEmitter
 
 /**
  * @author hellenxu
@@ -13,6 +12,7 @@ fun main() {
     println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
     println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
     println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
+    println("xxl-check-permutation-one: ${checkPermutation("1qazxsw23edc", "cxzasde32w1q")}")
 
     /**
      * with return
@@ -87,6 +87,30 @@ fun checkUniqueThree(input: String): Boolean {
         tmp[index] = true
     }
     println("xxl-unique-three-cost: ${System.currentTimeMillis() - start} ms")
+    return true
+}
+
+// solution one: use arrays [assume it only includes standard ASCII]
+// Big O: 2* N
+fun checkPermutation(source: String, target: String): Boolean {
+    if (source.length != target.length) {
+        return false
+    }
+
+    val tmp = Array(128) { 0 }
+    for (i in source.indices) {
+        val index = source[i].toInt()
+        tmp[index]++
+    }
+
+    for (i in target.indices) {
+        val index = target[i].toInt()
+        tmp[index]--
+        if (tmp[index] < 0) {
+            return false
+        }
+    }
+
     return true
 }
 
