@@ -13,6 +13,7 @@ fun main() {
     println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
     println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
     println("xxl-check-permutation-one: ${checkPermutation("1qazxsw23edc", "cxzasde32w1q")}")
+    println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
 
     /**
      * with return
@@ -112,5 +113,33 @@ fun checkPermutation(source: String, target: String): Boolean {
     }
 
     return true
+}
+
+// solution one: calculate the amount of space to set the size of result array, then set value
+// Big O: N + N + a*b
+fun replace(input: String, replace: String): String {
+    println("xxl-before: $input")
+    var spaceCount = 0
+    for (i in input) {
+        if (i == ' ') {
+            spaceCount ++
+        }
+    }
+    val size = input.length + spaceCount * replace.length
+    val result = Array(size) {' '}
+    for (i in input.indices) {
+        val tmp = input[i]
+        val lastIndex = result.indexOfLast { it != ' ' }
+        val index: Int = if (lastIndex < 0) { 0} else lastIndex + 1
+        if (tmp == ' ') {
+            for (j in replace.indices) {
+                result[index + j] = replace[j]
+            }
+        } else {
+            result[index] = tmp
+        }
+    }
+
+    return result.joinToString("")
 }
 
