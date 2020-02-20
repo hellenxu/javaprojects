@@ -14,6 +14,8 @@ fun main() {
     println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
     println("xxl-check-permutation-one: ${checkPermutation("1qazxsw23edc", "cxzasde32w1q")}")
     println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
+    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("taco cat")}")
+    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("tacocat")}")
 
     /**
      * with return
@@ -143,3 +145,20 @@ fun replace(input: String, replace: String): String {
     return result.joinToString("")
 }
 
+// Solution: create an array which accepts char from the last one to the first one
+// Big O: N
+fun checkPalindromePermutation(input: String): Boolean {
+    val len = input.length
+    val backwards = Array(len) {' '}
+    val lastIndex = input.lastIndex
+
+    for (i in 0 until len) {
+        backwards[i] = input[lastIndex - i]
+    }
+
+    if (backwards.joinToString("") == input) {
+        return true
+    }
+
+    return false
+}
