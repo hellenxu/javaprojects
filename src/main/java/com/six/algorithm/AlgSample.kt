@@ -1,6 +1,7 @@
 package main.java.com.six.algorithm
 
 import io.reactivex.Maybe
+import kotlin.math.abs
 
 /**
  * @author hellenxu
@@ -16,6 +17,10 @@ fun main() {
     println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
     println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("taco cat")}")
     println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("tacocat")}")
+    println("xxl-check-one-away: ${checkOneAway("pale", "ple")}")
+    println("xxl-check-one-away: ${checkOneAway("pales", "pale")}")
+    println("xxl-check-one-away: ${checkOneAway("pale", "bale")}")
+    println("xxl-check-one-away: ${checkOneAway("pale", "bake")}")
 
     /**
      * with return
@@ -161,4 +166,38 @@ fun checkPalindromePermutation(input: String): Boolean {
     }
 
     return false
+}
+
+fun checkOneAway(input1: String, input2: String): Boolean {
+    if (abs(input1.length - input2.length) > 1) {
+        return false
+    }
+
+    val tmp1 = Array(128) {0}
+    for (i in input1) {
+        val index = i.toInt()
+//        println("xxl-input1: $index")
+        tmp1[index] ++
+    }
+
+    val tmp2 = Array(128) {0}
+    for (i in input2) {
+        val index = i.toInt()
+//        println("xxl-input2: $index")
+        tmp2[index] ++
+    }
+
+    var awayCount = 0
+    for (i in tmp1.indices) {
+        if (abs(tmp1[i] - tmp2[i]) > 0) {
+//            println("xxl-tmp: $i; ${tmp1[i]}; ${tmp2[i]}")
+            awayCount ++
+        }
+//        println("xxl-count: $awayCount")
+        if (awayCount > 2 || (awayCount == 2 && input1.length != input2.length)) {
+            return false
+        }
+    }
+
+    return true
 }
