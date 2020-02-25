@@ -168,6 +168,10 @@ fun checkPalindromePermutation(input: String): Boolean {
     return false
 }
 
+// Solution:
+// 1) length offset is less than 2;
+// 2) awayCount should less or equal to 2; if awayCount == 2, length of two strings should be the same
+// Big O: N + N + 128
 fun checkOneAway(input1: String, input2: String): Boolean {
     if (abs(input1.length - input2.length) > 1) {
         return false
