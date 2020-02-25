@@ -211,20 +211,22 @@ fun checkOneAway(input1: String, input2: String): Boolean {
 fun compressStr(input: String): String {
     val result = StringBuilder()
     val len = input.length
-    var breakLen = len
     var index = 0
     var count = 0
     while (index < len) {
         val tmp = input[index]
         result.append(tmp)
 
-        for (i in input.indices) {
+        for (i in index until len) {
             if (tmp == input[i]) {
                 count ++
+                if ((index + count) == len) {
+                    result.append(count)
+                    index += count
+                }
             } else {
                 result.append(count)
                 index = i
-                breakLen -= count
                 count = 0
                 break
             }
