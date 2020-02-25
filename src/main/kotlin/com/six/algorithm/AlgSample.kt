@@ -1,4 +1,4 @@
-package main.java.com.six.algorithm
+package main.kotlin.com.six.algorithm
 
 import io.reactivex.Maybe
 import kotlin.math.abs
@@ -13,10 +13,17 @@ fun main() {
     println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
     println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
     println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
-    println("xxl-check-permutation-one: ${checkPermutation("1qazxsw23edc", "cxzasde32w1q")}")
+    println("xxl-check-permutation-one: ${checkPermutation(
+        "1qazxsw23edc",
+        "cxzasde32w1q"
+    )}")
     println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
-    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("taco cat")}")
-    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation("tacocat")}")
+    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
+        "taco cat"
+    )}")
+    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
+        "tacocat"
+    )}")
     println("xxl-check-one-away: ${checkOneAway("pale", "ple")}")
     println("xxl-check-one-away: ${checkOneAway("pales", "pale")}")
     println("xxl-check-one-away: ${checkOneAway("pale", "bale")}")
