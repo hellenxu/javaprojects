@@ -21,6 +21,7 @@ fun main() {
     println("xxl-check-one-away: ${checkOneAway("pales", "pale")}")
     println("xxl-check-one-away: ${checkOneAway("pale", "bale")}")
     println("xxl-check-one-away: ${checkOneAway("pale", "bake")}")
+    println("xxl-string-compression: ${compressStr("aabcccccaaa")}")
 
     /**
      * with return
@@ -204,4 +205,31 @@ fun checkOneAway(input1: String, input2: String): Boolean {
     }
 
     return true
+}
+
+// Solution: use flags
+fun compressStr(input: String): String {
+    val result = StringBuilder()
+    val len = input.length
+    var breakLen = len
+    var index = 0
+    var count = 0
+    while (index < len) {
+        val tmp = input[index]
+        result.append(tmp)
+
+        for (i in input.indices) {
+            if (tmp == input[i]) {
+                count ++
+            } else {
+                result.append(count)
+                index = i
+                breakLen -= count
+                count = 0
+                break
+            }
+        }
+    }
+
+    return result.toString()
 }
