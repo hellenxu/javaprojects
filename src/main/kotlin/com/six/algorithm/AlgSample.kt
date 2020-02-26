@@ -10,25 +10,30 @@ import kotlin.math.abs
  */
 
 fun main() {
-    println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
-    println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
-    println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
-    println("xxl-check-permutation-one: ${checkPermutation(
-        "1qazxsw23edc",
-        "cxzasde32w1q"
-    )}")
-    println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
-    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
-        "taco cat"
-    )}")
-    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
-        "tacocat"
-    )}")
-    println("xxl-check-one-away: ${checkOneAway("pale", "ple")}")
-    println("xxl-check-one-away: ${checkOneAway("pales", "pale")}")
-    println("xxl-check-one-away: ${checkOneAway("pale", "bale")}")
-    println("xxl-check-one-away: ${checkOneAway("pale", "bake")}")
-    println("xxl-string-compression: ${compressStr("aabcccccaaa")}")
+//    println("xxl-check-unique-one: ${checkUniqueOne("qoqu34arouecnq")}")
+//    println("xxl-check-unique-two: ${checkUniqueTwo("qoqu34arouecnq")}")
+//    println("xxl-check-unique-three: ${checkUniqueThree("qoqu34arouecnq")}")
+//    println("xxl-check-permutation-one: ${checkPermutation(
+//        "1qazxsw23edc",
+//        "cxzasde32w1q"
+//    )}")
+//    println("xxl-replace: ${replace("12 2haoa  o20   ", "%20")}")
+//    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
+//        "taco cat"
+//    )}")
+//    println("xxl-check-palindrome-permutation: ${checkPalindromePermutation(
+//        "tacocat"
+//    )}")
+//    println("xxl-check-one-away: ${checkOneAway("pale", "ple")}")
+//    println("xxl-check-one-away: ${checkOneAway("pales", "pale")}")
+//    println("xxl-check-one-away: ${checkOneAway("pale", "bale")}")
+//    println("xxl-check-one-away: ${checkOneAway("pale", "bake")}")
+//    println("xxl-string-compression: ${compressStr("aabcccccaaa")}")
+
+    println("xxl-check-string-rotation: ${checkRotation("erbottlewat", "waterbottle")}")
+    println("xxl-check-string-rotation: ${checkRotation("abcddd", "dabcd")}")
+    println("xxl-check-string-rotation: ${checkRotation("abcdefg", "efgabcd")}")
+
 
     /**
      * with return
@@ -241,4 +246,31 @@ fun compressStr(input: String): String {
     }
 
     return result.toString()
+}
+
+// only with subString, check whether input2 is a rotation of input1
+fun checkRotation(input1: String, input2: String): Boolean {
+    if (input1.length != input2.length) {
+        return false
+    }
+
+    var edgeIndex = 0
+    for (i in edgeIndex .. input2.lastIndex) {
+        val tmp = input2.substring(edgeIndex)
+        if (input1.indexOf(tmp) == -1) {
+            edgeIndex ++
+        } else {
+            break
+        }
+    }
+
+    val len = input1.length
+    val firstPart = input2.substring(0, edgeIndex)
+    val secondPart = input2.substring(edgeIndex, input2.lastIndex)
+    when(firstPart.length) {
+        0, len -> { if (input1 == input2) return true}
+        else -> {if (input1.indexOf(firstPart) != -1 && input1.indexOf(secondPart) != -1) return true}
+    }
+
+    return false
 }
