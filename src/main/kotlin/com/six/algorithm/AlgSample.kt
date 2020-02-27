@@ -274,3 +274,26 @@ fun checkRotation(input1: String, input2: String): Boolean {
 
     return false
 }
+
+// Solution:
+// Big O:
+fun rotateImage(imgMatrix: Array<Array<Int>>) {
+    println("****** Before ******")
+    for (i in imgMatrix.indices) {
+        for (j in imgMatrix[i]) {
+            println("$j ")
+        }
+    }
+
+    val len = imgMatrix.size
+
+    for (layer in 0 until len / 2) {
+        val first = layer
+        val last = len - 1 - layer
+
+    }
+    
+
+
+    println("****** After ******")
+}
