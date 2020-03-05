@@ -286,11 +286,19 @@ fun rotateImage(imgMatrix: Array<Array<Int>>) {
     }
 
     val len = imgMatrix.size
-
-    for (layer in 0 until len / 2) {
-        val first = layer
-        val last = len - 1 - layer
-
+    val layerAmt = len / 2
+    for(i in 0 until layerAmt) {
+        for(j in 0 until len) {
+            for(k in 0 until len) {
+                if ((i == j) or (i + j == len -1) or (k == i) or (k+i == len -1)) {
+                    val tmp = imgMatrix[j][k]
+                    imgMatrix[j][k] = imgMatrix[k][j]
+                    imgMatrix[k][j] = tmp
+                } else {
+                    continue
+                }
+            }
+        }
     }
     
 
