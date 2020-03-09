@@ -34,6 +34,13 @@ fun main() {
     println("xxl-check-string-rotation: ${checkRotation("abcddd", "dabcd")}")
     println("xxl-check-string-rotation: ${checkRotation("abcdefg", "efgabcd")}")
 
+    val array1 = arrayOf(1,1,1,1,1)
+    val array2 = arrayOf(1,4,0,1,2)
+    val array3 = arrayOf(1,4,1,0,2)
+    val array4 = arrayOf(1,3,3,3,2)
+    val array5 = arrayOf(1,1,1,1,1)
+    val matrix = arrayOf(array1, array2, array3, array4, array5)
+    rotateImage(matrix)
 
     /**
      * with return
@@ -281,27 +288,38 @@ fun rotateImage(imgMatrix: Array<Array<Int>>) {
     println("****** Before ******")
     for (i in imgMatrix.indices) {
         for (j in imgMatrix[i]) {
-            println("$j ")
+            print("$j ")
         }
+        println("")
     }
 
     val len = imgMatrix.size
     val layerAmt = len / 2
     for(i in 0 until layerAmt) {
-        for(j in 0 until len) {
-            for(k in 0 until len) {
-                if ((i == j) or (i + j == len -1) or (k == i) or (k+i == len -1)) {
-                    val tmp = imgMatrix[j][k]
-                    imgMatrix[j][k] = imgMatrix[k][j]
-                    imgMatrix[k][j] = tmp
-                } else {
-                    continue
-                }
-            }
+        val first = i
+        val last = len - 1 - i
+        for (j in first until last) {
+            val offset = j - first
+            val top = imgMatrix[first][j]
+
+            // left -> top
+            imgMatrix[first][j] = imgMatrix[last-offset][first]
+            // bottom -> left
+            imgMatrix[last-offset][first] = imgMatrix[last][last - offset]
+            // right -> bottom
+            imgMatrix[last][last - offset] = imgMatrix[j][last]
+            // top -> right
+            imgMatrix[j][last] = top
         }
     }
     
 
 
     println("****** After ******")
+    for (i in imgMatrix.indices) {
+        for (j in imgMatrix[i]) {
+            print("$j ")
+        }
+        println("")
+    }
 }
