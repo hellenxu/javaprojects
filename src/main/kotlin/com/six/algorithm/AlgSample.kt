@@ -296,10 +296,10 @@ fun rotateImage(imgMatrix: Array<Array<Int>>) {
     val len = imgMatrix.size
     val layerAmt = len / 2
     for(i in 0 until layerAmt) {
-        val first = i
-        val last = len - 1 - i
+        val first = i // first index
+        val last = len - 1 - i // last index
         for (j in first until last) {
-            val offset = j - first
+            val offset = j - first // use to calculate the flexible index
             val top = imgMatrix[first][j]
 
             // left -> top
