@@ -41,6 +41,7 @@ fun main() {
     val array5 = arrayOf(1,1,1,1,1)
     val matrix = arrayOf(array1, array2, array3, array4, array5)
     rotateImage(matrix)
+    resetMatrix(matrix)
 
     /**
      * with return
@@ -285,6 +286,7 @@ fun checkRotation(input1: String, input2: String): Boolean {
 // Solution:
 // Big O:
 fun rotateImage(imgMatrix: Array<Array<Int>>) {
+    println("****** RotateImage ******")
     println("****** Before ******")
     for (i in imgMatrix.indices) {
         for (j in imgMatrix[i]) {
@@ -321,5 +323,49 @@ fun rotateImage(imgMatrix: Array<Array<Int>>) {
             print("$j ")
         }
         println("")
+    }
+}
+
+fun resetMatrix(matrix: Array<Array<Int>>) {
+    println("****** ResetMatrix ******")
+    println("****** Before ******")
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            print("${matrix[i][j]} ")
+        }
+        println()
+    }
+
+    val len = matrix.size
+    val column = Array(len) {0}
+    val row = Array(len) {0}
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            if (matrix[i][j] == 0) {
+                column[j] = 1
+                row[i] = 1
+            }
+        }
+    }
+    for (i in column.indices) {
+        if (column[i] == 1) {
+            for (k in 0 until len) {
+                matrix[k][i] = 0
+            }
+        }
+
+        if (row[i] == 1) {
+            for (k in 0 until len) {
+                matrix[i][k] = 0
+            }
+        }
+    }
+
+    println("****** After ******")
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            print("${matrix[i][j]} ")
+        }
+        println()
     }
 }
