@@ -10,6 +10,13 @@ import kotlin.math.abs
 
 fun main() {
     removeDups(mutableListOf(10, 9, 10, 11, 12, 1, 1, 1))
+
+    val result = getSubList(mutableListOf(10, 9, 10, 11, 12, 1, 1, 1), 3)
+    println("****** SubList ******")
+    result.forEach {
+        print("$it ")
+    }
+    println()
 }
 
 fun removeDups(input: MutableList<Any?>) {
@@ -47,4 +54,22 @@ fun removeDups(input: MutableList<Any?>) {
         }
     }
     println()
+}
+
+fun getSubList(input: MutableList<Any>, start: Int): MutableList<Any> {
+    if (start > input.lastIndex) {
+        throw Exception("invalid input: $start")
+    }
+
+    val result = mutableListOf<Any>()
+    for (index in input.indices) {
+        if (index == start) {
+            for (i in index .. input.lastIndex) {
+                result.add(input[i])
+            }
+            break
+        }
+    }
+
+    return result
 }
