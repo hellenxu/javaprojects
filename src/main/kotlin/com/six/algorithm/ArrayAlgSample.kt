@@ -33,7 +33,7 @@ fun main() {
 
     println("xxl-check-string-rotation: ${checkRotation("erbottlewat", "waterbottle")}")
     println("xxl-check-string-rotation: ${checkRotation("abcddd", "dabcd")}")
-    println("xxl-check-string-rotation: ${checkRotation("abcdefg", "efgabcd")}")
+    println("xxl-check-string-rotation: ${checkRotationTwo("abcdefg", "efgabcd")}")
 
     val array1 = arrayOf(1,1,1,1,1)
     val array2 = arrayOf(1,4,0,1,2)
@@ -283,6 +283,17 @@ fun checkRotation(input1: String, input2: String): Boolean {
         else -> {if (input1.indexOf(firstPart) != -1 && input1.indexOf(secondPart) != -1) return true}
     }
 
+    return false
+}
+
+// only with subString, check whether input2 is a rotation of input1
+// Solution two: s1 = xy, s2 = yx ==> s2 is a substring of xyxy, which is s1s1
+fun checkRotationTwo(input1: String, input2: String): Boolean {
+    val len = input1.length
+    if (len == input2.length && len > 0) {
+        val s1s1 = input1 + input2
+        return s1s1.indexOf(input2) > -1
+    }
     return false
 }
 
