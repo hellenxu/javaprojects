@@ -259,7 +259,7 @@ fun compressStr(input: String): String {
 
 // only with subString, check whether input2 is a rotation of input1
 fun checkRotation(input1: String, input2: String): Boolean {
-    if (input1.length != input2.length) {
+    if (input1.length != input2.length || input1.isEmpty() || input2.isEmpty()) {
         return false
     }
 
