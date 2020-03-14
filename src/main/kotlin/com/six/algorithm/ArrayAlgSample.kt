@@ -229,6 +229,7 @@ fun checkOneAway(input1: String, input2: String): Boolean {
 }
 
 // Solution: use flags
+// Big O: N * N
 fun compressStr(input: String): String {
     val result = StringBuilder()
     val len = input.length
@@ -258,6 +259,7 @@ fun compressStr(input: String): String {
 }
 
 // only with subString, check whether input2 is a rotation of input1
+// Big O: 0 + 1 + 2 .. + n = n(n + 1) / 2
 fun checkRotation(input1: String, input2: String): Boolean {
     if (input1.length != input2.length || input1.isEmpty() || input2.isEmpty()) {
         return false
@@ -285,7 +287,7 @@ fun checkRotation(input1: String, input2: String): Boolean {
 }
 
 // Solution:
-// Big O:
+// Big O: (N/2 -1) + (N/2 - 2) + ... + 1 = N * (N/2 - 1)/4 
 fun rotateImage(imgMatrix: Array<Array<Int>>) {
     println("****** RotateImage ******")
     println("****** Before ******")
