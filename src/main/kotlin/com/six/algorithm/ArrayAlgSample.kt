@@ -2,6 +2,7 @@ package main.kotlin.com.six.algorithm
 
 import io.reactivex.Maybe
 import kotlin.math.abs
+import kotlin.math.max
 
 /**
  * @author hellenxu
@@ -326,6 +327,8 @@ fun rotateImage(imgMatrix: Array<Array<Int>>) {
     }
 }
 
+// reset M * N matrix
+// Big O: M * N + max(M,N) * max(M, N) ≈ M*N
 fun resetMatrix(matrix: Array<Array<Int>>) {
     println("****** ResetMatrix ******")
     println("****** Before ******")
@@ -336,7 +339,7 @@ fun resetMatrix(matrix: Array<Array<Int>>) {
         println()
     }
 
-    val len = matrix.size
+    val len = max(matrix.size, matrix[0].size)
     val column = Array(len) {0}
     val row = Array(len) {0}
     for (i in matrix.indices) {
