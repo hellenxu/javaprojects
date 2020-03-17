@@ -17,10 +17,25 @@ fun main() {
         print("$it ")
     }
     println()
+
+    val head = prepareLinkedList()
+    removeDupsWithLinkedList(head)
+}
+
+private fun prepareLinkedList(): LinkedListNode {
+    val head = LinkedListNode(null, 10)
+    var current = head
+    for (i in 0..15) {
+        val tmp = LinkedListNode(null, i % 7)
+        current.next = tmp
+        current = tmp
+    }
+
+    return head
 }
 
 fun removeDups(input: MutableList<Any?>) {
-    println("****** After ******")
+    println("****** Before ******")
     for (i in input) {
         print("$i ")
     }
@@ -72,4 +87,52 @@ fun getSubList(input: MutableList<Any>, start: Int): MutableList<Any> {
     }
 
     return result
+}
+
+class LinkedListNode(var next: LinkedListNode?, val data: Int)
+
+// Big O: N [N == length of LinkedList]
+fun removeDupsWithLinkedList(head: LinkedListNode?) {
+    println("****** Before ******")
+    var readCurrent = head
+    while (readCurrent != null) {
+        val output: String = if (readCurrent != head) {
+            " -> ${readCurrent.data}"
+        } else {
+            "${readCurrent.data}"
+        }
+        print(output)
+        readCurrent = readCurrent.next
+    }
+    println()
+
+
+    val tmp = arrayListOf<Int>()
+    var previous: LinkedListNode? = null
+    var current: LinkedListNode? = head
+
+    while (current != null) {
+        if (tmp.contains(current.data)) {
+            previous?.next = current.next
+        } else {
+            tmp.add(current.data)
+            previous = current
+        }
+
+        current = current.next
+    }
+
+
+    println("****** After ******")
+    readCurrent = head
+    while (readCurrent != null) {
+        val output: String = if (readCurrent != head) {
+            " -> ${readCurrent.data}"
+        } else {
+            "${readCurrent.data}"
+        }
+        print(output)
+        readCurrent = readCurrent.next
+    }
+    println()
 }
