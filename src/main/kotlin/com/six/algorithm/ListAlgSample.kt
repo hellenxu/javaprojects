@@ -20,6 +20,8 @@ fun main() {
 
     val head = prepareLinkedList()
     removeDupsWithLinkedList(head)
+
+    getSubListWithLinkedList(3, head)
 }
 
 private fun prepareLinkedList(): LinkedListNode {
@@ -127,6 +129,54 @@ fun removeDupsWithLinkedList(head: LinkedListNode?) {
     readCurrent = head
     while (readCurrent != null) {
         val output: String = if (readCurrent != head) {
+            " -> ${readCurrent.data}"
+        } else {
+            "${readCurrent.data}"
+        }
+        print(output)
+        readCurrent = readCurrent.next
+    }
+    println()
+}
+
+// Big O: N
+fun getSubListWithLinkedList(target: Int, head: LinkedListNode?) {
+    if (head == null) {
+        throw Exception("it's an empty list")
+    }
+
+    println("****** Whole LinkedList ******")
+    var readCurrent = head
+    while (readCurrent != null) {
+        val output: String = if (readCurrent != head) {
+            " -> ${readCurrent.data}"
+        } else {
+            "${readCurrent.data}"
+        }
+        print(output)
+        readCurrent = readCurrent.next
+    }
+    println()
+
+
+    var count = 1
+    var currentNode = head
+    var targetNode: LinkedListNode? = null
+
+    while (currentNode != null) {
+        if (count == target) {
+            targetNode = currentNode
+            break
+        } else {
+            count ++
+        }
+        currentNode = currentNode.next
+    }
+
+    println("****** Sub LinkedList ******")
+    readCurrent = targetNode
+    while (readCurrent != null) {
+        val output: String = if (readCurrent != targetNode) {
             " -> ${readCurrent.data}"
         } else {
             "${readCurrent.data}"
