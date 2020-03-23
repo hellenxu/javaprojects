@@ -22,6 +22,8 @@ fun main() {
     removeDupsWithLinkedList(head)
 
     getSubListWithLinkedList(3, head)
+    
+    deleteMiddleNode(head)
 }
 
 private fun prepareLinkedList(): LinkedListNode {
@@ -159,4 +161,28 @@ private fun iterateLinkedList(head: LinkedListNode?) {
         readCurrent = readCurrent.next
     }
     println()
+}
+
+fun deleteMiddleNode(head: LinkedListNode?) {
+
+    println("****** Before ******")
+    iterateLinkedList(head)
+
+    var currentNode: LinkedListNode? = head
+    var fastPointer: LinkedListNode? = head
+    var previousNode: LinkedListNode? = head
+
+    while (fastPointer != null) {
+        previousNode = currentNode
+        currentNode = currentNode?.next
+        fastPointer = fastPointer.next?.next
+    }
+
+    if (currentNode != head && currentNode != null) {
+        previousNode?.next = currentNode.next
+    }
+
+    println("****** After ******")
+    iterateLinkedList(head)
+
 }
