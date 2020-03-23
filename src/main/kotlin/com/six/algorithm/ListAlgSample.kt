@@ -96,18 +96,7 @@ class LinkedListNode(var next: LinkedListNode?, val data: Int)
 // Big O: N [N == length of LinkedList]
 fun removeDupsWithLinkedList(head: LinkedListNode?) {
     println("****** Before ******")
-    var readCurrent = head
-    while (readCurrent != null) {
-        val output: String = if (readCurrent != head) {
-            " -> ${readCurrent.data}"
-        } else {
-            "${readCurrent.data}"
-        }
-        print(output)
-        readCurrent = readCurrent.next
-    }
-    println()
-
+    iterateLinkedList(head)
 
     val tmp = arrayListOf<Int>()
     var previous: LinkedListNode? = null
@@ -126,38 +115,14 @@ fun removeDupsWithLinkedList(head: LinkedListNode?) {
 
 
     println("****** After ******")
-    readCurrent = head
-    while (readCurrent != null) {
-        val output: String = if (readCurrent != head) {
-            " -> ${readCurrent.data}"
-        } else {
-            "${readCurrent.data}"
-        }
-        print(output)
-        readCurrent = readCurrent.next
-    }
-    println()
+    iterateLinkedList(head)
 }
 
 // Big O: N
 fun getSubListWithLinkedList(target: Int, head: LinkedListNode?) {
-    if (head == null) {
-        throw Exception("it's an empty list")
-    }
 
     println("****** Whole LinkedList ******")
-    var readCurrent = head
-    while (readCurrent != null) {
-        val output: String = if (readCurrent != head) {
-            " -> ${readCurrent.data}"
-        } else {
-            "${readCurrent.data}"
-        }
-        print(output)
-        readCurrent = readCurrent.next
-    }
-    println()
-
+    iterateLinkedList(head)
 
     var count = 1
     var currentNode = head
@@ -174,9 +139,18 @@ fun getSubListWithLinkedList(target: Int, head: LinkedListNode?) {
     }
 
     println("****** Sub LinkedList ******")
-    readCurrent = targetNode
+
+    iterateLinkedList(targetNode)
+}
+
+private fun iterateLinkedList(head: LinkedListNode?) {
+    if (head == null) {
+        throw Exception("it's an empty list")
+    }
+
+    var readCurrent = head
     while (readCurrent != null) {
-        val output: String = if (readCurrent != targetNode) {
+        val output: String = if (readCurrent != head) {
             " -> ${readCurrent.data}"
         } else {
             "${readCurrent.data}"
