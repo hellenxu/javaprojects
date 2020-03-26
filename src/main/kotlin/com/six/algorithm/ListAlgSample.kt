@@ -24,6 +24,8 @@ fun main() {
     getSubListWithLinkedList(3, head)
     
     deleteMiddleNode(head)
+
+    partitionLinkedList(head, 5)
 }
 
 private fun prepareLinkedList(): LinkedListNode {
@@ -185,4 +187,54 @@ fun deleteMiddleNode(head: LinkedListNode?) {
     println("****** After ******")
     iterateLinkedList(head)
 
+}
+
+fun partitionLinkedList(head: LinkedListNode?, partition: Int) {
+    println("****** Partition $partition Before ******")
+    iterateLinkedList(head)
+
+    var left: LinkedListNode? = null
+    var right: LinkedListNode? = null
+    var currentNode = head
+    while (currentNode != null) {
+        if (currentNode.data < partition) {
+            left = addNodeToLinkedList(left, currentNode, false)
+        } else {
+            right = addNodeToLinkedList(right, currentNode, false)
+        }
+        currentNode = currentNode.next
+    }
+
+    val newHead = addNodeToLinkedList(left, right, true)
+
+    println("****** Partition $partition After ******")
+    iterateLinkedList(newHead)
+}
+
+private fun addNodeToLinkedList(head: LinkedListNode?, node: LinkedListNode?, isLinkedList: Boolean): LinkedListNode? {
+    if (node == null) {
+        throw Exception("node is null, can't operate")
+    }
+
+    val newNode = LinkedListNode(null, node.data)
+
+    if (head == null) {
+        return newNode
+    }
+
+    var current = head
+    var previous = head
+
+    while (current != null) {
+        previous = current
+        current = current.next
+    }
+    previous?.next = newNode
+    if (!isLinkedList) {
+        newNode.next = null
+    } else {
+        newNode.next = node.next
+    }
+
+    return head
 }
